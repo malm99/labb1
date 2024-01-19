@@ -12,21 +12,18 @@ public class Tester {
     }
     @Test
     void testMove(){
-        volvo.getPosition();
         volvo.startEngine();
         volvo.move();
         assert (volvo.position.y == 0.1);
     }
     @Test
     void testTurnLeft(){
-        volvo.getPosition();
         volvo.startEngine();
         volvo.turnLeft();
         assert (volvo.position.x == -0.1);
     }
     @Test
     void testTurnRight(){
-        volvo.getPosition();
         volvo.startEngine();
         volvo.turnRight();
         assert (volvo.position.x == 0.1);
