@@ -10,15 +10,6 @@ public class Car implements Moveable{
     public String modelName; // The car model name
     public Point2D.Double position; // Position of the car
 
-    public Car(int nrDoors, Color color, double enginePower, String modelName ){
-        this.nrDoors = nrDoors;
-        this.color = color;
-        this.enginePower = enginePower;
-        this.modelName = modelName;
-        this.position = new Point2D.Double();
-        stopEngine();
-    }
-
     // Methods:
 
     public int getNrDoors(){
@@ -29,6 +20,7 @@ public class Car implements Moveable{
     }
 
     public Point2D.Double getPosition(){
+        position = new Point2D.Double();
         return position;
     }
 
@@ -61,7 +53,6 @@ public class Car implements Moveable{
     @Override
     public void move() {
         position.y = position.y + currentSpeed;
-
     }
 
     @Override
