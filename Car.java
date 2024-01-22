@@ -3,65 +3,113 @@ import java.awt.geom.Point2D;
 
 public class Car implements Moveable{
     // Attributes
-    public int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    public Color color; // Color of the car
-    public String modelName; // The car model name
-    public Point2D.Double position; // Position of the car
+    private int nrDoors; // Number of doors on the car
+    private double enginePower; // Engine power of the car
+    protected double currentSpeed; // The current speed of the car
+    private Color color; // Color of the car
+    private String modelName; // The car model name
+    protected Point2D.Double position; // The position of the car
+    private enum Direction {up, down, left, right}; // Define what directions the car can have
+    private Direction direction; // The direction of the car
+
+    public Car(int nrDoors, Color color, int enginePower, String modelName){
+        this.nrDoors = nrDoors;
+        this.color = color;
+        this.enginePower = enginePower;
+        this.modelName = modelName;
+        position = new Point2D.Double(0, 0);
+        stopEngine();
+        setDirection(Direction.up);
+    }
 
     // Methods:
 
-    public int getNrDoors(){
+    protected int getNrDoors(){
         return nrDoors;
     }
-    public double getEnginePower(){
+    protected double getEnginePower(){
         return enginePower;
     }
 
-    public Point2D.Double getPosition(){
-        position = new Point2D.Double();
-        return position;
+
+    protected String getModelName(){
+        return modelName;
     }
 
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
 
-    public Color getColor(){
+    protected Color getColor(){
         return color;
     }
 
-    public void setColor(Color clr){
+    protected void setColor(Color clr){
         color = clr;
     }
 
-    public void startEngine(){
+    protected void startEngine(){
         currentSpeed = 0.1;
     }
 
-    public void stopEngine(){
+    protected void stopEngine(){
         currentSpeed = 0;
     }
 
-    public void setPosition(double x, double y){
-        position.x = x;
-        position.y = y;
+
+    protected void setDirection(Direction dir){
+        direction = dir;
     }
 
+    protected Direction getDirection(){
+        return direction;
+    }
 
     @Override
     public void move() {
-        position.y = position.y + currentSpeed;
+        if (getDirection() == Direction.up){
+            position.y = position.y + currentSpeed;
+        }
+        if (getDirection() == Direction.down){
+            position.y = position.y - currentSpeed;
+        }
+        if (getDirection() == Direction.left){
+            position.x = position.x - currentSpeed;
+        }
+
+        if (getDirection() == Direction.right){
+            position.x = position.x + currentSpeed;
+        }
     }
 
     @Override
     public void turnLeft() {
-        position.x = position.x - currentSpeed;
+        if (getDirection() == Direction.up){
+            direction = Direction.left;
+        }
+        if (getDirection() == Direction.down){
+            direction = Direction.right;
+        }
+        if (getDirection() == Direction.left){
+            direction = Direction.down;
+        }
+
+        if (getDirection() == Direction.right){
+            direction = Direction.up;
+        }
     }
 
     @Override
     public void turnRight() {
-        position.x = position.x + currentSpeed;
+        if (getDirection() == Direction.up){
+            direction = Direction.right;
+        }
+        if (getDirection() == Direction.down){
+            direction = Direction.left;
+        }
+        if (getDirection() == Direction.left){
+            direction = Direction.up;
+        }
+
+        if (getDirection() == Direction.right){
+            direction = Direction.down;
+        }
     }
 }

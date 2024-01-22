@@ -21,15 +21,15 @@ public class Saab95 extends Car{
     private double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
-        return enginePower * 0.01 * turbo;
+        return getEnginePower() * 0.01 * turbo;
     }
 
     private void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        currentSpeed = Math.min(currentSpeed + speedFactor() * amount, getEnginePower());
     }
 
     private void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+        currentSpeed = Math.max(currentSpeed - speedFactor() * amount,0);
     }
     
     // TODO fix this method according to lab pm
