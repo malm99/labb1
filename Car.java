@@ -5,10 +5,10 @@ public class Car implements Moveable{
     // Attributes
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
+    protected double currentSpeed; // The current speed of the car. Protected because messy function call in subclass when private
     private Color color; // Color of the car
     private String modelName; // The car model name
-    protected Point2D.Double position; // The position of the car
+    private Point2D.Double position; // The position of the car
     private enum Direction {up, down, left, right}; // Define what directions the car can have
     private Direction direction; // The direction of the car
 
@@ -54,12 +54,16 @@ public class Car implements Moveable{
     }
 
 
-    protected void setDirection(Direction dir){
+    private void setDirection(Direction dir){
         direction = dir;
     }
 
     protected Direction getDirection(){
         return direction;
+    }
+
+    protected Point2D.Double getPosition(){
+        return position;
     }
 
     @Override
@@ -84,15 +88,20 @@ public class Car implements Moveable{
         if (getDirection() == Direction.up){
             direction = Direction.left;
         }
-        if (getDirection() == Direction.down){
+
+        else if (getDirection() == Direction.down) {
             direction = Direction.right;
-        }
-        if (getDirection() == Direction.left){
-            direction = Direction.down;
+
         }
 
-        if (getDirection() == Direction.right){
+        else if (getDirection() == Direction.left) {
+            direction = Direction.down;
+
+        }
+
+        else if (getDirection() == Direction.right) {
             direction = Direction.up;
+
         }
     }
 
@@ -101,14 +110,14 @@ public class Car implements Moveable{
         if (getDirection() == Direction.up){
             direction = Direction.right;
         }
-        if (getDirection() == Direction.down){
+        else if (getDirection() == Direction.down){
             direction = Direction.left;
         }
-        if (getDirection() == Direction.left){
+        else if (getDirection() == Direction.left){
             direction = Direction.up;
         }
 
-        if (getDirection() == Direction.right){
+        else if (getDirection() == Direction.right){
             direction = Direction.down;
         }
     }
