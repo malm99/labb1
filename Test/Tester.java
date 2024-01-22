@@ -122,3 +122,4 @@ public class Tester {
         assert(volvo.currentSpeed == 100);
     }
 }
+
