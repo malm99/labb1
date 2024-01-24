@@ -30,6 +30,7 @@ public class Tester {
         volvo.currentSpeed = 1;
         volvo.turnLeft();
         volvo.move();
+
         volvo.turnLeft();
         volvo.move();
         assert(volvo.getPosition().y == -1);

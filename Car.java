@@ -71,14 +71,14 @@ public class Car implements Moveable{
         if (getDirection() == Direction.up){
             position.y = position.y + currentSpeed;
         }
-        if (getDirection() == Direction.down){
+        else if (getDirection() == Direction.down){
             position.y = position.y - currentSpeed;
         }
-        if (getDirection() == Direction.left){
+        else if (getDirection() == Direction.left){
             position.x = position.x - currentSpeed;
         }
 
-        if (getDirection() == Direction.right){
+        else if (getDirection() == Direction.right){
             position.x = position.x + currentSpeed;
         }
     }
