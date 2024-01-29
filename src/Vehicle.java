@@ -1,18 +1,18 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Car implements Moveable{
+public class Vehicle implements Moveable{
     // Attributes
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car. Protected because messy function call in subclass when private
-    private Color color; // Color of the car
+    private int nrDoors; // Number of doors on the vehicle
+    private double enginePower; // Engine power of the vehicle
+    protected double currentSpeed; // The current speed of the vehicle. Protected because messy function call in subclass when private
+    private Color color; // Color of the vehicle
     private String modelName; // The car model name
-    private Point2D.Double position; // The position of the car
-    private enum Direction {up, down, left, right}; // Define what directions the car can have
-    private Direction direction; // The direction of the car
+    private Point2D.Double position; // The position of the vehicle
+    private enum Direction {up, down, left, right}; // Define what directions the vehicle can have
+    private Direction direction; // The direction of the vehicle
 
-    public Car(int nrDoors, Color color, int enginePower, String modelName){
+    public Vehicle(int nrDoors, Color color, int enginePower, String modelName){
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
@@ -64,6 +64,10 @@ public class Car implements Moveable{
 
     protected Point2D.Double getPosition(){
         return position;
+    }
+    protected void setPosition(double x, double y){
+        position.x = x;
+        position.y = y;
     }
 
     @Override
