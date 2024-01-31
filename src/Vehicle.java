@@ -1,7 +1,8 @@
+package src;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Vehicle implements Moveable{
+public abstract class Vehicle implements Moveable{
     // Attributes
     private int nrDoors; // Number of doors on the vehicle
     private double enginePower; // Engine power of the vehicle
@@ -69,6 +70,37 @@ public class Vehicle implements Moveable{
         position.x = x;
         position.y = y;
     }
+
+
+    protected void incrementSpeed(double amount){
+        currentSpeed = Math.min(currentSpeed + speedFactor() * amount, getEnginePower());}
+
+
+    private void decrementSpeed(double amount){
+        currentSpeed = Math.max(currentSpeed - speedFactor() * amount,0);
+    }}
+
+
+
+protected void gas(double amount){
+    if (amount > 1){
+        amount = 1;
+    };
+    if (amount < 0){
+        amount = 0;
+    };
+    incrementSpeed(amount);
+}
+
+
+protected void brake(double amount){
+    if (amount > 1){
+        amount = 1;
+    };
+    if (amount < 0){
+        amount = 0;
+    };
+    decrementSpeed(amount);
 
     @Override
     public void move() {

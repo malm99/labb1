@@ -1,3 +1,4 @@
+package src;
 public class ScaniaRamp implements Ramp{
     private final int angle;
     public int angleRamp;

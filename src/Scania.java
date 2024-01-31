@@ -1,10 +1,9 @@
+package src;
 import java.awt.*;
 
 public class Scania extends Truck{
-    protected Ramp ramp;
     public Scania() {
-        super(2, Color.black, 250, "Scania");
-        ramp = new ScaniaRamp();
+        super(2, Color.black, 250, "Scania", new ScaniaRamp());
     }
 
     @Override

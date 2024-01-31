@@ -1,3 +1,4 @@
+package src;
 import java.awt.*;
 
 public class Volvo240 extends Car{
@@ -13,33 +14,7 @@ public class Volvo240 extends Car{
         return getEnginePower() * 0.01 * trimFactor;
     }
 
-    private void incrementSpeed(double amount){
-	    currentSpeed = Math.min(currentSpeed + speedFactor() * amount, getEnginePower());
     }
 
-    private void decrementSpeed(double amount){
-        currentSpeed = Math.max(currentSpeed - speedFactor() * amount,0);
-    }
 
-    // TODO fix this method according to lab pm
-    protected void gas(double amount){
-        if (amount > 1){
-            amount = 1;
-        };
-        if (amount < 0){
-            amount = 0;
-        };
-        incrementSpeed(amount);
-    }
-
-    // TODO fix this method according to lab pm
-    protected void brake(double amount){
-        if (amount > 1){
-            amount = 1;
-        };
-        if (amount < 0){
-            amount = 0;
-        };
-        decrementSpeed(amount);
-    }
 }

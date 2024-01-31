@@ -1,3 +1,4 @@
+package src;
 import java.awt.*;
 import java.util.Stack;
 
@@ -5,7 +6,7 @@ public class CarTransport<T extends Car> extends Truck{
 
     protected CarTransportLoad<T> loadCar;
     private double loadDistance;
-    public CarTransportRamp ramp;
+
     public CarTransport() {
         super(2, Color.green, 500, "TransportTruck", new CarTransportRamp());
         loadDistance = 1;

@@ -1,3 +1,4 @@
+package src;
 public class CarTransportRamp implements Ramp{
 
     private boolean rampDown; // The position of the ramp. Ramp down means truck can't move and cars can board.
