@@ -1,10 +1,8 @@
 package src;
 
 public interface Ramp {
-    void rampUp();
-
-    void rampDown();
-   // boolean canMove();
-
+    void openRamp();
+    void closeRamp();
+    int getAngleRamp();
 
 }

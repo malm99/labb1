@@ -2,23 +2,32 @@ package src;
 
 import java.awt.*;
 
-public class Truck extends Vehicle{
-    //public Ramp ramp;
+public abstract class Truck extends Vehicle{
+    public Ramp ramp;
 
-    public Truck(int nrDoors, Color color, int enginePower, String modelName) {
+    public Truck(int nrDoors, Color color, int enginePower, String modelName, Ramp ramp) {
         super(nrDoors, color, enginePower, modelName);
+        this.ramp = ramp;
 
     }
 
-    public boolean canOpen(){
+    @Override
+    double speedFactor() {
+        return getEnginePower() * 0.01;
+    }
+
+    @Override
+    public void gas(double amount) {
+        if(ramp.getAngleRamp() == 0) {
+            super.gas(amount);
+        }
+    }
+
+    public void openRamp(){
         if (currentSpeed == 0){
-            return true;
-        }
-        else {
-            return false;
+            ramp.openRamp();
         }
     }
-
 
 
 
