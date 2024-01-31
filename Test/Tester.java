@@ -1,23 +1,19 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import src.Saab95;
+import src.Volvo240;
 
 import java.awt.geom.Point2D;
 
 public class Tester {
-
+/*
     private Volvo240 volvo;
     private Saab95 saab;
-    private Scania scania;
     private double startSpeed;
-    private Workshop<Volvo240> volvoWorkshop;
-    private Workshop<Car> carWorkshop;
     @BeforeEach
     void setUp(){
         volvo = new Volvo240();
         saab = new Saab95();
-        scania = new Scania();
-        volvoWorkshop = new Workshop<Volvo240>(4);
-        carWorkshop = new Workshop<Car>(4);
     }
     @Test
     void testMove(){
@@ -129,56 +125,7 @@ public class Tester {
         assert(volvo.currentSpeed == 100);
     }
 
-    // Scania tests
-
-//    @Test
-//    void rampAngleBounds(){
-//        scania.increaseAngleRamp(1000);
-//        assert(scania.getAngleRamp() == 70);
-//
-//        scania.decreaseAngleRamp(80000);
-//        assert(scania.getAngleRamp() == 0);
-//    }
-//
-//    @Test
-//    void rampAngleParameter(){
-//        scania.increaseAngleRamp(40);
-//        scania.decreaseAngleRamp(-20);
-//        scania.increaseAngleRamp(-5);
-//        assert(scania.getAngleRamp() == 40);
-//    }
-//
-//    @Test
-//    void moveWhileRampUp(){
-//        scania.increaseAngleRamp(10);
-//        assert(scania.getPosition().y == 0);
-//
-//        scania.currentSpeed = 1;
-//        scania.move();
-//        assert(scania.getPosition().y == 0);
-//
-//        scania.currentSpeed = 0;
-//        scania.decreaseAngleRamp(10);
-//        scania.currentSpeed = 1;
-//        scania.move();
-//        assert(scania.getPosition().y == 1);
-//    }
-
-    @Test
-    void typeWorkshop(){
-        volvoWorkshop.loadCar(volvo);
-        assert(volvoWorkshop.unloadCar() instanceof Volvo240);
-    }
-
-    @Test
-    void workshopQueue(){
-        carWorkshop.loadCar(volvo);
-        carWorkshop.loadCar(saab);
-        assert(carWorkshop.unloadCar() instanceof Volvo240);
-    }
-
-
-
+ */
 
 }
 

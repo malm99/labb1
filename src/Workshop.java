@@ -1,27 +1,35 @@
-public class Workshop<T extends Car>{
+package src;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Workshop<T extends Car> implements Load<T>{
     protected int capacity;
+    protected Queue<T> queue = new LinkedList<>();
 
     // Example. This workshops only accepts Volvos
 //    public  Workshop<Volvo240> volvoworkshop = new Workshop<Volvo240>(4);
 
     protected T type;
     // Composition:
-    protected WorkshopLoad<T> loadCar = new WorkshopLoad<T>();
+
     public Workshop(int capacity){
         this.capacity = capacity;
     }
 
-    public void loadCar(T car){
-        if (loadCar.getSize() < capacity){
-            loadCar.load(car);
+    @Override
+    public void load(T car) {
+        if (queue.size() < capacity){
+            queue.add(car);
         }
     }
 
-    public T unloadCar(){
-        // Check if empty, kanske
-        return loadCar.unload();
+    @Override
+    public T unload() {
+        if(!queue.isEmpty()){
+            return queue.remove();
+        }
+        return null;
     }
-
-
 }
 

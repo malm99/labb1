@@ -1,14 +1,36 @@
+package src;
+
 import java.awt.*;
 import java.util.Stack;
 
-public class CarTransport<T extends Car> extends Truck{
+public class CarTransport<T extends Car> extends Truck implements Ramp, Load<T>{
 
-    protected CarTransportLoad<T> loadCar;
+    private final RampClass ramp = new RampClass();
+    protected Stack<T> cargoStack = new Stack<T>();
+    private int newAngleRamp;
     private double loadDistance;
-    public CarTransportRamp ramp;
     public CarTransport() {
-        super(2, Color.green, 500, "TransportTruck", new CarTransportRamp());
+        super(2, Color.green, 500, "TransportTruck");
         loadDistance = 1;
+    }
+    @Override
+    public void load(T car) {
+        if (getDirection() == car.getDirection()) {
+            if (getPosition().distance(car.getPosition()) <= loadDistance && (ramp.getAngleRamp() == 70)) {
+                cargoStack.push(car);
+            }
+        }
+    }
+
+    @Override
+    public T unload() {
+        // Does not take direction into account
+        if (ramp.getAngleRamp() == 70 && !cargoStack.isEmpty()){
+            T car = cargoStack.pop();
+            car.setPosition(getPosition().x + loadDistance, getPosition().y + loadDistance);
+            return car;
+        }
+        return null; // Antagligen fel
     }
 
     @Override
@@ -17,8 +39,8 @@ public class CarTransport<T extends Car> extends Truck{
         if (ramp.canMove()){
             super.move();
             // If the stack is not empty, change the position for each car to the truck's position if it moves
-            if (!loadCar.noLoad()){
-                for(T car : loadCar.cargoStack)
+            if (!cargoStack.isEmpty()){
+                for(T car : cargoStack)
                 {
                     car.setPosition(getPosition().x, getPosition().y);
                 }
@@ -26,19 +48,19 @@ public class CarTransport<T extends Car> extends Truck{
         }
     }
 
-    protected void loadCar(T car){
-        if (getDirection() == car.getDirection()){
-            if (getPosition().distance(car.getPosition()) <= loadDistance && ramp.getRampDown()){
-                loadCar.load(car);
-            }
-        }
+
+    @Override
+    public void rampUp() {
+        newAngleRamp = 70;
+        ramp.setAngleRamp(newAngleRamp);
+
     }
 
-    protected void unloadCar(){
-        // Does not take direction into account
-        if (ramp.getRampDown() && !loadCar.noLoad()){
-            Car car = loadCar.unload();
-            car.setPosition(getPosition().x + loadDistance, getPosition().y + loadDistance);
-        }
+    @Override
+    public void rampDown() {
+        newAngleRamp = 0;
+        ramp.setAngleRamp(newAngleRamp);
+
     }
+
 }
