@@ -3,7 +3,7 @@ package src;
 import java.awt.*;
 
 public abstract class Truck extends Vehicle{
-    public Ramp ramp;
+    protected Ramp ramp;
 
     public Truck(int nrDoors, Color color, int enginePower, String modelName, Ramp ramp) {
         super(nrDoors, color, enginePower, modelName);
@@ -27,6 +27,10 @@ public abstract class Truck extends Vehicle{
         if (currentSpeed == 0){
             ramp.openRamp();
         }
+    }
+
+    public void closeRamp() {
+        ramp.closeRamp();
     }
 
 
