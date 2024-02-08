@@ -11,8 +11,8 @@ public abstract class Vehicle implements Moveable{
     private Color color; // Color of the vehicle
     private String modelName; // The car model name
     private Point2D.Double position; // The position of the vehicle
-    private enum Direction {up, down, left, right}; // Define what directions the vehicle can have
-    private Direction direction; // The direction of the vehicle
+    protected enum Direction {up, down, left, right}; // Define what directions the vehicle can have
+    protected Direction direction; // The direction of the vehicle
 
     public Vehicle(int nrDoors, Color color, int enginePower, String modelName){
         this.nrDoors = nrDoors;
@@ -21,7 +21,7 @@ public abstract class Vehicle implements Moveable{
         this.modelName = modelName;
         position = new Point2D.Double(0, 0);
         stopEngine();
-        setDirection(Direction.up);
+        direction = Direction.down;
     }
 
     // Methods:
@@ -57,8 +57,13 @@ public abstract class Vehicle implements Moveable{
     }
 
 
-    private void setDirection(Direction dir){
-        direction = dir;
+    protected void setDirection(Direction dir){
+        if (dir == Direction.up) {
+            direction = Direction.down;
+        } else if (dir == Direction.down) {
+            direction = Direction.up;
+
+        }
     }
 
     protected Direction getDirection(){
@@ -68,6 +73,7 @@ public abstract class Vehicle implements Moveable{
     protected Point2D.Double getPosition(){
         return position;
     }
+
     protected void setPosition(double x, double y){
         position.x = x;
         position.y = y;
@@ -106,10 +112,10 @@ public abstract class Vehicle implements Moveable{
     @Override
     public void move() {
         if (getDirection() == Direction.up){
-            position.y = position.y + currentSpeed;
+            position.y = position.y - currentSpeed;
         }
         else if (getDirection() == Direction.down){
-            position.y = position.y - currentSpeed;
+            position.y = position.y + currentSpeed;
         }
         else if (getDirection() == Direction.left){
             position.x = position.x - currentSpeed;
