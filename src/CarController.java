@@ -44,7 +44,14 @@ public class CarController {
 
         // Start the timer
         cc.timer.start();
+
+        for (Vehicle vehicle: cc.cars){
+            vehicle.setPosition(cc.frame.drawPanel.getPoint(vehicle).x, cc.frame.drawPanel.getPoint(vehicle).y);
+        }
+
+
     }
+
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
@@ -52,18 +59,18 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle car : cars) {
-            if ((car.getPosition().getY() > 500 && car.direction == Car.Direction.down) || (car.getPosition().getY() < 0 && car.direction == Car.Direction.up) || (car.getPosition().getX() < 0 && car.direction == Car.Direction.left) || (car.getPosition().getX() > 800 && car.direction == Car.Direction.right)) {
-                car.stopEngine();
-                car.turnLeft();
-                car.turnLeft();
-                car.startEngine();
-                car.move();
-            }
-            else {
+                if ((car.getPosition().getY() > 500 && car.direction == Car.Direction.down) || (car.getPosition().getY() < 0 && car.direction == Car.Direction.up) || (car.getPosition().getX() < 0 && car.direction == Car.Direction.left) || (car.getPosition().getX() > 800 && car.direction == Car.Direction.right)) {
+                    car.stopEngine();
+                    car.turnLeft();
+                    car.turnLeft();
+                    car.startEngine();
+                    car.move();
+                }
+                else {
                     car.move();
                     int x = (int) Math.round(car.getPosition().getX());
                     int y = (int) Math.round(car.getPosition().getY());
-                    frame.drawPanel.moveit(x, y);
+                    frame.drawPanel.moveit(car, x, y);
                     // repaint() calls the paintComponent method of the panel
                     frame.drawPanel.repaint();
                 }
@@ -76,7 +83,6 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle car : cars) {
-
             car.gas(gas);
         }
     }
@@ -88,8 +94,50 @@ public class CarController {
         }
     }
 
-    void turboOn(Saab95 saab){
-        saab.setTurboOn();
+    void turboOn(){
+        for (Vehicle car: cars){
+            if (car instanceof Saab95){
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+
+    void turboOff(){
+        for (Vehicle car: cars){
+            if (car instanceof Saab95){
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+
+    void openRamp(){
+        for (Vehicle truck: cars){
+            if (truck instanceof Scania){
+                ((Scania) truck).openRamp();
+                System.out.println("Open ramp");
+            }
+        }
+    }
+
+    void closeRamp(){
+        for (Vehicle truck: cars){
+            if (truck instanceof Scania){
+                ((Scania) truck).closeRamp();
+                System.out.println("Close ramp");
+            }
+        }
+    }
+
+    void startAll(){
+        for (Vehicle vehicle: cars){
+            vehicle.startEngine();
+        }
+    }
+
+    void stopAll(){
+        for (Vehicle vehicle: cars){
+            vehicle.stopEngine();
+        }
     }
 
 }

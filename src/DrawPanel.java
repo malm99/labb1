@@ -18,22 +18,41 @@ public class DrawPanel extends JPanel{
     Point volvoWorkshopPoint = new Point(300,300);
 
     BufferedImage saabImage;
-    Point saabPoint = new Point(100,0);
+    Point saabPoint = new Point(0,100);
 
     BufferedImage scaniaImage;
-    Point scaniaPoint = new Point(200, 0);
+    Point scaniaPoint = new Point(0, 200);
 
     // TODO: Make this general for all cars
-    void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+    void moveit(Vehicle car, int x, int y){
+        if (car instanceof Volvo240){
+            volvoPoint.x = x;
+            volvoPoint.y = y;
+        } else if (car instanceof Saab95) {
+            saabPoint.x = x;
+            saabPoint.y = y;
+        } else if (car instanceof Scania) {
+            scaniaPoint.x = x;
+            scaniaPoint.y = y;
+        }
+    }
+
+    Point getPoint(Vehicle car){
+        if (car instanceof Volvo240){
+            return volvoPoint;
+        } else if (car instanceof Saab95) {
+            return saabPoint;
+        }
+        else {
+            return scaniaPoint;
+        }
     }
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
+        this.setBackground(Color.pink);
         // Print an error message in case file is not found with a try/catch block
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
