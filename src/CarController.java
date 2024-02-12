@@ -3,8 +3,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-
+import java.util.Iterator;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -27,6 +26,8 @@ public class CarController {
     // A list of cars, modify if needed
     ArrayList<Vehicle> cars = new ArrayList<>();
 
+    protected Workshop<Volvo240> volvoWS = new Workshop<>(1);
+
     //methods:
 
     public static void main(String[] args) {
@@ -36,6 +37,7 @@ public class CarController {
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
         cc.cars.add(new Scania());
+        //cc.cars.add(new Volvo240());
 
 
 
@@ -49,16 +51,17 @@ public class CarController {
             vehicle.setPosition(cc.frame.drawPanel.getPoint(vehicle).x, cc.frame.drawPanel.getPoint(vehicle).y);
         }
 
-
     }
-
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehicle car : cars) {
+            Iterator<Vehicle> iterator = cars.iterator();
+            while (iterator.hasNext()) {
+                Vehicle car = iterator.next();
+            //for (Vehicle car : cars) {
                 if ((car.getPosition().getY() > 500 && car.direction == Car.Direction.down) || (car.getPosition().getY() < 0 && car.direction == Car.Direction.up) || (car.getPosition().getX() < 0 && car.direction == Car.Direction.left) || (car.getPosition().getX() > 800 && car.direction == Car.Direction.right)) {
                     car.stopEngine();
                     car.turnLeft();
@@ -67,6 +70,12 @@ public class CarController {
                     car.move();
                 }
                 else {
+                    if (car instanceof Volvo240 && (Math.round(car.getPosition().getX()) == frame.drawPanel.volvoWorkshopPoint.getX() && Math.round(car.getPosition().getY()) == frame.drawPanel.volvoWorkshopPoint.getY())) {
+                        if (!volvoWS.NoCapacity()) {
+                            volvoWS.load((Volvo240) car);
+                            iterator.remove();
+                        }
+                    }
                     car.move();
                     int x = (int) Math.round(car.getPosition().getX());
                     int y = (int) Math.round(car.getPosition().getY());
