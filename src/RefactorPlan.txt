@@ -4,7 +4,8 @@ Flytta main-metod från CarController för att följa Single Responsibility Prin
 
 Flytta instansiering av bilarna från CarController pga dependency inversion principle (DIP)
     Bör inte bero på konkreta subklasser till Vechile
-    Lägg i ny klass "VehicleList" eller liknande
+    Lägg i ny klass "VehicleFactory" eller liknande
+    Metoder för att skapa instanser av respektive fordon
 
 Ta bort usage av Volvo, Saab och Scania från DrawPanel pga DIP
     Bör inte bero på konkreta subklasser till Vechile
@@ -16,8 +17,12 @@ Flytta alla actionListeners från CarView pga mutal dependency
 
 Workshop får en position
 
+Skapa ett interface PositionImage
+    x, y och getImage
+    Bilder läggs direkt i subklasser till Vehicle och i Workshop
+
 ---------------------------------------------------------------------------------------------------------------------
 
 Planens olika delar kan utföras parallellt, av flera utvecklare samtidigt. Exempelvis kan en person
-fixa main-metoden, en annan kan ge Workshop en position och en tredje kan fixa något annat.
+fixa main-metoden, en annan kan ge Workshop en position och en tredje kan fixa något av resterande.
 

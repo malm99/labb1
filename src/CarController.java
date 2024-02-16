@@ -92,7 +92,9 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle car : cars) {
-            car.gas(gas);
+            if (car.currentSpeed > 0){
+                car.gas(gas);
+            }
         }
     }
 
