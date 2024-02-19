@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
-    // Just a single image, TODO: Generalize
+    // Just a single image,
     BufferedImage volvoImage;
     // To keep track of a single car's position
     Point volvoPoint = new Point(300,250);
@@ -27,13 +27,11 @@ public class DrawPanel extends JPanel{
     BufferedImage scaniaImage;
     Point scaniaPoint = new Point(300, 200);
 
-    // TODO: Make this general for all cars
+    //
     void moveit(Vehicle car, int x, int y){
         if (car instanceof Volvo240){
             volvoPoint.x = x;
             volvoPoint.y = y;
-            //volvoPoint2.x =x;
-            //volvoPoint2.y =y;
         } else if (car instanceof Saab95) {
             saabPoint.x = x;
             saabPoint.y = y;
@@ -81,7 +79,7 @@ public class DrawPanel extends JPanel{
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
+    //
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

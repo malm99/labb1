@@ -19,73 +19,123 @@ public class CarController {
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
 
-    private Timer timer = new Timer(delay, new TimerListener());
-
+    private Timer timer = new Timer(delay, new CarController.TimerListener());
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Vehicle> cars = new ArrayList<>();
+    private VehicleModel vehicleModel;
+    //ArrayList<Vehicle> vehicles = new ArrayList<>();
 
     protected Workshop<Volvo240> volvoWS = new Workshop<>(1);
 
     //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Scania());
-        //cc.cars.add(new Volvo240());
-
-
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
-
-        for (Vehicle vehicle: cc.cars){
-            vehicle.setPosition(cc.frame.drawPanel.getPoint(vehicle).x, cc.frame.drawPanel.getPoint(vehicle).y);
-        }
-
+    // TODO: konstruktor
+    void CarController(VehicleModel model, CarView frame){
+        this.vehicleModel = model;
+        this.frame = frame;
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
-            Iterator<Vehicle> iterator = cars.iterator();
+            Iterator<Vehicle> iterator = vehicleModel.vehicles.iterator();
             while (iterator.hasNext()) {
-                Vehicle car = iterator.next();
-            //for (Vehicle car : cars) {
-                if ((car.getPosition().getY() > 500 && car.direction == Car.Direction.down) || (car.getPosition().getY() < 0 && car.direction == Car.Direction.up) || (car.getPosition().getX() < 0 && car.direction == Car.Direction.left) || (car.getPosition().getX() > 800 && car.direction == Car.Direction.right)) {
-                    car.stopEngine();
-                    car.turnLeft();
-                    car.turnLeft();
-                    car.startEngine();
-                    car.move();
+                Vehicle vehicle = iterator.next();
+                if ((vehicle.getPosition().getY() > 500 && vehicle.direction == Car.Direction.down) || (vehicle.getPosition().getY() < 0 && vehicle.direction == Car.Direction.up) || (vehicle.getPosition().getX() < 0 && vehicle.direction == Car.Direction.left) || (vehicle.getPosition().getX() > 800 && vehicle.direction == Car.Direction.right)) {
+                    vehicle.stopEngine();
+                    vehicle.turnLeft();
+                    vehicle.turnLeft();
+                    vehicle.startEngine();
+                    vehicle.move();
                 }
                 else {
-                    if (car instanceof Volvo240 && (Math.round(car.getPosition().getX()) == frame.drawPanel.volvoWorkshopPoint.getX() && Math.round(car.getPosition().getY()) == frame.drawPanel.volvoWorkshopPoint.getY())) {
+                    if (vehicle instanceof Volvo240 && (Math.round(vehicle.getPosition().getX()) == frame.drawPanel.volvoWorkshopPoint.getX() && Math.round(vehicle.getPosition().getY()) == frame.drawPanel.volvoWorkshopPoint.getY())) {
                         if (!volvoWS.NoCapacity()) {
-                            volvoWS.load((Volvo240) car);
+                            volvoWS.load((Volvo240) vehicle);
                             iterator.remove();
                         }
                     }
-                    car.move();
-                    int x = (int) Math.round(car.getPosition().getX());
-                    int y = (int) Math.round(car.getPosition().getY());
-                    frame.drawPanel.moveit(car, x, y);
+                    vehicle.move();
+                    int x = (int) Math.round(vehicle.getPosition().getX());
+                    int y = (int) Math.round(vehicle.getPosition().getY());
+                    frame.drawPanel.moveit(vehicle, x, y);
                     // repaint() calls the paintComponent method of the panel
                     frame.drawPanel.repaint();
                 }
 
             }
         }
+
+    }
+    // TODO: vart ska actionListners vara?
+    void actions() {
+        frame.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double gas = ((double) frame.gasAmount) / 100;
+                for (Vehicle vehicle : vehicleModel.vehicles) {
+                    if (vehicle.currentSpeed > 0) {
+                        vehicle.gas(gas);
+                    }
+                }
+            }
+        });
+
+        frame.brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double brake = ((double) frame.gasAmount) / 100;
+                for (Vehicle vehicle : vehicleModel.vehicles) {
+                    vehicle.brake(brake);
+                }
+            }
+        });
+    }
+ /*
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.turboOn();
+            }
+        });
+
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.turboOff();
+            }
+        });
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.startAll();
+            }
+        });
+
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.stopAll();
+            }
+        });
+
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.closeRamp();
+            }
+        });
+
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.openRamp();
+            }
+        });
     }
 
     // Calls the gas method for each car once
@@ -149,6 +199,6 @@ public class CarController {
         for (Vehicle vehicle: cars){
             vehicle.stopEngine();
         }
-    }
+    }*/
 
 }
