@@ -6,7 +6,7 @@ public class Saab95 extends Car{
 
     private boolean turboOn;
 
-    
+    String saabImage = "pics/Saab95.jpg";
     public Saab95(){
         super(2, Color.red, 125, "Saab95");
 	    turboOn = false;
@@ -30,4 +30,8 @@ public class Saab95 extends Car{
         return getEnginePower() * 0.01 * turbo;
     }
 
+    @Override
+    public String getImage() {
+        return saabImage;
+    }
 }

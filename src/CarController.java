@@ -30,10 +30,15 @@ public class CarController {
 
     //methods:
     // TODO: konstruktor
-    void CarController(VehicleModel model, CarView frame){
+    CarController(VehicleModel model, CarView frame){
         this.vehicleModel = model;
         this.frame = frame;
+        actions();
     }
+    void startTimer(){
+        this.timer.start();
+    }
+
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
@@ -68,137 +73,64 @@ public class CarController {
 
             }
         }
-
     }
     // TODO: vart ska actionListners vara?
     void actions() {
         frame.gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double gas = ((double) frame.gasAmount) / 100;
-                for (Vehicle vehicle : vehicleModel.vehicles) {
-                    if (vehicle.currentSpeed > 0) {
-                        vehicle.gas(gas);
-                    }
-                }
+                vehicleModel.gas(frame.gasAmount);
             }
         });
 
         frame.brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double brake = ((double) frame.gasAmount) / 100;
-                for (Vehicle vehicle : vehicleModel.vehicles) {
-                    vehicle.brake(brake);
+                vehicleModel.brake(frame.gasAmount);
                 }
-            }
         });
-    }
- /*
-        turboOnButton.addActionListener(new ActionListener() {
+
+        frame.turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turboOn();
+                vehicleModel.turboOn();
             }
         });
 
-        turboOffButton.addActionListener(new ActionListener() {
+        frame.turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turboOff();
+                vehicleModel.turboOff();
             }
         });
 
-        startButton.addActionListener(new ActionListener() {
+        frame.startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.startAll();
+                vehicleModel.startAll();
             }
         });
 
-        stopButton.addActionListener(new ActionListener() {
+        frame.stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.stopAll();
+                vehicleModel.stopAll();
             }
         });
 
-        liftBedButton.addActionListener(new ActionListener() {
+        frame.liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.closeRamp();
+                vehicleModel.closeRamp();
             }
         });
 
-        lowerBedButton.addActionListener(new ActionListener() {
+        frame.lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.openRamp();
+                vehicleModel.openRamp();
             }
         });
     }
-
-    // Calls the gas method for each car once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Vehicle car : cars) {
-            if (car.currentSpeed > 0){
-                car.gas(gas);
-            }
-        }
-    }
-
-    void brake(int amount) {
-        double brake = ((double) amount) /100;
-        for (Vehicle car: cars){
-            car.brake(brake);
-        }
-    }
-
-    void turboOn(){
-        for (Vehicle car: cars){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOn();
-            }
-        }
-    }
-
-    void turboOff(){
-        for (Vehicle car: cars){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOff();
-            }
-        }
-    }
-
-    void openRamp(){
-        for (Vehicle truck: cars){
-            if (truck instanceof Scania){
-                ((Scania) truck).openRamp();
-                System.out.println("Open ramp");
-            }
-        }
-    }
-
-    void closeRamp(){
-        for (Vehicle truck: cars){
-            if (truck instanceof Scania){
-                ((Scania) truck).closeRamp();
-                System.out.println("Close ramp");
-            }
-        }
-    }
-
-    void startAll(){
-        for (Vehicle vehicle: cars){
-            vehicle.startEngine();
-        }
-    }
-
-    void stopAll(){
-        for (Vehicle vehicle: cars){
-            vehicle.stopEngine();
-        }
-    }*/
 
 }
