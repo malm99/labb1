@@ -2,12 +2,13 @@ package src;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel implements ModelUpdateListener{
 
     // Just a single image,
     BufferedImage volvoImage;
@@ -26,6 +27,7 @@ public class DrawPanel extends JPanel{
 
     BufferedImage scaniaImage;
     Point scaniaPoint = new Point(300, 200);
+
 
     //
     void moveit(Vehicle car, int x, int y){
@@ -89,5 +91,10 @@ public class DrawPanel extends JPanel{
         g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null);
         g.drawImage(saabImage, saabPoint.x,saabPoint.y,null);
         g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y,null);
+    }
+
+    @Override
+    public void actOnModelUpdate() {
+        repaint();
     }
 }

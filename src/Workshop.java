@@ -4,12 +4,11 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Workshop<T extends Car> implements Load<T>, Image{
+public class Workshop<T extends Car> implements Load<T>{
     protected int capacity;
     protected Queue<T> queue = new LinkedList<>();
 
     private Point2D.Double position;
-    String volvoWS = "pics/VolvoBrand.jpg";
 
     public Workshop(int capacity){
         this.capacity = capacity;
@@ -35,15 +34,5 @@ public class Workshop<T extends Car> implements Load<T>, Image{
         return null;
     }
 
-    @Override
-    public String getImage() {
-        return volvoWS;
-    }
-
-    @Override
-    public Point2D.Double getPosition() {
-
-        return position;
-    }
 }
 

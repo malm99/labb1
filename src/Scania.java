@@ -10,8 +10,5 @@ public class Scania extends Truck {
         //setPosition(600, 0);
     }
 
-    @Override
-    public String getImage() {
-        return scaniaImage;
-    }
+
 }

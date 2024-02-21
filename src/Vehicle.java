@@ -3,7 +3,7 @@ package src;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public abstract class Vehicle implements Moveable, Image {
+public abstract class Vehicle implements Moveable {
     // Attributes
     private int nrDoors; // Number of doors on the vehicle
     private double enginePower; // Engine power of the vehicle
@@ -70,7 +70,7 @@ public abstract class Vehicle implements Moveable, Image {
         return direction;
     }
 
-    @Override
+
     public Point2D.Double getPosition(){
         return position;
     }
