@@ -5,8 +5,8 @@ import java.awt.*;
 public abstract class Truck extends Vehicle{
     protected Ramp ramp;
 
-    public Truck(int nrDoors, Color color, int enginePower, String modelName, Ramp ramp) {
-        super(nrDoors, color, enginePower, modelName);
+    public Truck(int nrDoors, Color color, int enginePower, String modelName, Ramp ramp, String image) {
+        super(nrDoors, color, enginePower, modelName, image);
         this.ramp = ramp;
 
     }

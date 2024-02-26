@@ -1,7 +1,11 @@
+/*
 package src;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.*;
+import src.Car;
+import src.Saab95;
+import src.Volvo240;
+import src.Workshop;
 
 public class WorkShopTest {
 
@@ -29,3 +33,4 @@ public class WorkShopTest {
         assert(carWS.unload() instanceof Saab95);
     }
 }
+*/

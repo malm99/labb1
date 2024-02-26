@@ -1,7 +1,10 @@
 package src;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public abstract class Vehicle implements Moveable {
     // Attributes
@@ -13,8 +16,9 @@ public abstract class Vehicle implements Moveable {
     private Point2D.Double position; // The position of the vehicle
     protected enum Direction {up, down, left, right}; // Define what directions the vehicle can have
     protected Direction direction; // The direction of the vehicle
+    BufferedImage image;
 
-    public Vehicle(int nrDoors, Color color, int enginePower, String modelName){
+    public Vehicle(int nrDoors, Color color, int enginePower, String modelName, String image){
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
@@ -22,11 +26,19 @@ public abstract class Vehicle implements Moveable {
         position = new Point2D.Double(0, 0);
         stopEngine();
         direction = Direction.down;
+        setImage(image);
     }
 
     // Methods:
 
-
+    public void setImage(String imgString){
+        try {
+            image = ImageIO.read(CarView.class.getResourceAsStream(imgString));
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     public int getNrDoors() {
         return nrDoors;
     }
@@ -58,12 +70,13 @@ public abstract class Vehicle implements Moveable {
 
 
     protected void setDirection(Direction dir){
-        if (dir == Direction.up) {
+        /*if (dir == Direction.up) {
             direction = Direction.down;
         } else if (dir == Direction.down) {
             direction = Direction.up;
 
-        }
+        }*/
+        direction = dir;
     }
 
     protected Direction getDirection(){

@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Workshop<T extends Car> implements Load<T>{
+public class Workshop<T extends Car> implements Load<T> {
     protected int capacity;
     protected Queue<T> queue = new LinkedList<>();
 
@@ -12,6 +12,7 @@ public class Workshop<T extends Car> implements Load<T>{
 
     public Workshop(int capacity){
         this.capacity = capacity;
+        position = new Point2D.Double(300, 300);
     }
 
     public boolean NoCapacity(){
@@ -34,5 +35,8 @@ public class Workshop<T extends Car> implements Load<T>{
         return null;
     }
 
+    public Point2D.Double getPosition() {
+        return position;
+    }
 }
 

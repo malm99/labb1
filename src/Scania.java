@@ -6,7 +6,7 @@ public class Scania extends Truck {
 
     String scaniaImage = "pics/Scania.jpg";
     public Scania() {
-        super(2, Color.black, 250, "Scania", new ScaniaRamp());
+        super(2, Color.black, 250, "Scania", new ScaniaRamp(), "pics/Scania.jpg");
         //setPosition(600, 0);
     }
 

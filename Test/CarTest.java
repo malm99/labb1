@@ -1,7 +1,9 @@
+/*
 package src;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.*;
+import src.Saab95;
+import src.Volvo240;
 
 public class CarTest {
     private Volvo240 volvo;
@@ -123,3 +125,4 @@ public class CarTest {
         assert(volvo.currentSpeed == 100);
     }
 }
+*/

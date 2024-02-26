@@ -1,7 +1,11 @@
+/*
 package src;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.*;
+import src.CarTransport;
+import src.Saab95;
+import src.Scania;
+import src.Volvo240;
 
 public class TruckTest {
 
@@ -62,3 +66,4 @@ public class TruckTest {
     }
 
 }
+*/

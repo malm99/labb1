@@ -3,13 +3,13 @@ package src;
 import java.awt.*;
 import java.util.Stack;
 
-public class CarTransport extends Truck implements Load<Car>{
+public class CarTransport extends Truck implements Load<Car> {
     protected Stack<Car> cargoStack = new Stack<>();
 
     private final int capacity;
     private double loadDistance;
     public CarTransport(int capacity) {
-        super(2, Color.green, 500, "TransportTruck", new CarTransportRamp());
+        super(2, Color.green, 500, "TransportTruck", new CarTransportRamp(), "pics/CarTransport.jpg");
         loadDistance = 1;
         this.capacity = capacity;
     }

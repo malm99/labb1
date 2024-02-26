@@ -1,12 +1,12 @@
 package src;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class VehicleModel {
     private final int delay = 50;
@@ -14,18 +14,19 @@ public class VehicleModel {
     protected List<ModelUpdateListener> listener = new ArrayList<>();
     protected Workshop<Volvo240> volvoWS = new Workshop<>(1);
     private Timer timer = new Timer(delay, new VehicleModel.TimerListener());
+    private int carDist = 0;
 
     public VehicleModel() {
-        initVehicle(VehicleFactory.createVehicle("Volvo240"), 0, 0);
-        initVehicle(VehicleFactory.createVehicle("Saab95"), 0, 100);
-        initVehicle(VehicleFactory.createVehicle("Scania"), 0,300);
-
+        initVehicle(VehicleFactory.createVehicle("Volvo240"), carDist, 0);
+        initVehicle(VehicleFactory.createVehicle("Saab95"), carDist, 0);
+        initVehicle(VehicleFactory.createVehicle("Scania"), carDist,0);
     }
 
 
-    private void initVehicle(Vehicle vehicle, double x, double y){
+    protected void initVehicle(Vehicle vehicle, double x, double y){
         vehicle.setPosition(x,y);
         vehicles.add(vehicle);
+        carDist = carDist + 100;
     }
 
     void startTimer(){
@@ -39,8 +40,6 @@ public class VehicleModel {
             l.actOnModelUpdate();
         }
     }
-
-
 
     private class TimerListener implements ActionListener {
 
@@ -57,52 +56,54 @@ public class VehicleModel {
 
                 }
                 else {
-                    if (vehicle instanceof Volvo240 && (Math.round(vehicle.getPosition().getX()) == volvoWorkshopPoint.getX() && Math.round(vehicle.getPosition().getY()) == volvoWorkshopPoint.getY())) {
+                    if (vehicle instanceof Volvo240 && (Math.round(vehicle.getPosition().getX()) == volvoWS.getPosition().x && Math.round(vehicle.getPosition().getY()) == volvoWS.getPosition().y)) {
                         if (!volvoWS.NoCapacity()) {
                             volvoWS.load((Volvo240) vehicle);
                             iterator.remove();
                         }
                     }
                     vehicle.move();
-                    int x = (int) Math.round(vehicle.getPosition().getX());
-                    int y = (int) Math.round(vehicle.getPosition().getY());
+
+                    /*int x = (int) Math.round(vehicle.getPosition().getX());
+                    int y = (int) Math.round(vehicle.getPosition().getY());*/
 
                 }
-                notifyListeners();
+
+
             }
+            notifyListeners();
         }
     }
 
 
-    //TODO: kolla över instanceof
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle car : vehicles) {
-            if (car.currentSpeed > 0){
-                car.gas(gas);
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.currentSpeed > 0){
+                vehicle.gas(gas);
             }
         }
     }
 
     void brake(int amount) {
         double brake = ((double) amount) /100;
-        for (Vehicle car: vehicles){
-            car.brake(brake);
+        for (Vehicle vehicle: vehicles){
+            vehicle.brake(brake);
         }
     }
 
     void turboOn(){
-        for (Vehicle car: vehicles){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOn();
+        for (Vehicle vehicle: vehicles){
+            if (vehicle instanceof Saab95){
+                ((Saab95) vehicle).setTurboOn();
             }
         }
     }
 
     void turboOff(){
-        for (Vehicle car: vehicles){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOff();
+        for (Vehicle vehicle: vehicles){
+            if (vehicle instanceof Saab95){
+                ((Saab95) vehicle).setTurboOff();
             }
         }
     }
@@ -136,4 +137,29 @@ public class VehicleModel {
             vehicle.stopEngine();
         }
     }
+
+    void addCar(){
+        if(vehicles.size() < 8){
+            Random rand = new Random();
+            int randCar = rand.nextInt(2);
+            if (randCar == 1){
+                initVehicle(VehicleFactory.createVehicle("Volvo240"), carDist, 0);
+            }
+            else{
+                initVehicle(VehicleFactory.createVehicle("Saab95"), carDist, 0);
+            }
+        }
+    }
+
+    void removeCar(){
+        if(!vehicles.isEmpty()){
+            vehicles.removeLast();
+            carDist = carDist - 100;
+
+        }
+
+
+    }
+
+
 }

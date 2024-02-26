@@ -2,14 +2,14 @@ package src;
 
 import java.awt.*;
 
-public class Saab95 extends Car{
+public class Saab95 extends Car {
 
     private boolean turboOn;
 
     String saabImage = "pics/Saab95.jpg";
 
     public Saab95(){
-        super(2, Color.red, 125, "Saab95");
+        super(2, Color.red, 125, "Saab95", "pics/Saab95.jpg");
 	    turboOn = false;
         //setPosition(500, 0);
     }
